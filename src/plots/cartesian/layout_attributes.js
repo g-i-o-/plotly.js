@@ -95,6 +95,30 @@ module.exports = {
         ].join(' ')
     },
 
+    bounds: {
+        valType: 'info_array',
+        role: 'info',
+        items: [
+            {valType: 'number'},
+            {valType: 'number'}
+        ],
+        description: [
+            'Sets the maximum and minimum bounds of this axis.',
+            'If set, the plot cannot show anything outside this region.'
+        ].join(' ')
+    },
+    
+    boundsmode: {
+        valType: 'enumerated',
+        values: ['normal', 'auto'],
+        dflt: 'normal',
+        role: 'style',
+        description: [
+            'If *normal*, the bounds range is used is set, and not used otherwise.',
+            'If *auto*, the range autocomputation is used as the bounds range.',
+        ].join(' ')
+    },
+
     fixedrange: {
         valType: 'boolean',
         dflt: false,
