@@ -463,6 +463,7 @@ module.exports = function dragBox(gd, plotinfo, x, y, w, h, ns, ew) {
     // plotDrag: move the plot in response to a drag
     function plotDrag(dx, dy) {
         function dragAxList(axList, pix) {
+            var avgdpix = 0;
             for(var i = 0; i < axList.length; i++) {
                 var axi = axList[i];
                 if(!axi.fixedrange) {
@@ -478,11 +479,12 @@ module.exports = function dragBox(gd, plotinfo, x, y, w, h, ns, ew) {
                     avgdpix += (axi._r[0] - axi.range[0] + axi._r[1] - axi.range[1]) * axi._m / 2;
                 }
             }
+            return avgdpix / (axList.length || 1);
         }
 
         if(xActive === 'ew' || yActive === 'ns') {
-            if(xActive) dragAxList(xa, dx);
-            if(yActive) dragAxList(ya, dy);
+            if(xActive) dx = dragAxList(xa, dx);
+            if(yActive) dy = dragAxList(ya, dy);
             updateSubplots([xActive ? -dx : 0, yActive ? -dy : 0, pw, ph]);
             ticksAndAnnotations(yActive, xActive);
             return;
