@@ -103,6 +103,8 @@ module.exports = function handleAxisDefaults(containerIn, containerOut, coerce, 
     Lib.noneOrAll(containerIn.range, containerOut.range, [0, 1]);
 
     coerce('fixedrange');
+    coerce('bounds');
+    coerce('boundsmode');
 
     handleTickValueDefaults(containerIn, containerOut, coerce, axType);
     handleTickLabelDefaults(containerIn, containerOut, coerce, axType, options);

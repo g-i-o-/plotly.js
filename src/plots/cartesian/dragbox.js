@@ -430,20 +430,61 @@ module.exports = function dragBox(gd, plotinfo, x, y, w, h, ns, ew) {
         else if(dragger.onmousewheel !== undefined) dragger.onmousewheel = zoomWheel;
     }
 
+    function computeAxisBounds(axi) {
+        var plotAxis = dragOptions.plotinfo[axi._name];
+        return Axes.getAutoRange(plotAxis);
+    }
+
+    function clampRangeToBounds(range, bounds) {
+        if(!bounds) {
+            return range;
+        }
+
+        var r1 = range[0], r2 = range[1];
+        var dr = r2 - r1;
+
+        var b1 = bounds[0];
+        var b2 = bounds[1];
+        var db = b2 - b1;
+        if(dr > db) {
+            dr = db;
+        }
+        if(r1 < b1) {
+            r2 = b1 + dr;
+            r1 = b1;
+        } else if(r2 > b2) {
+            r1 = b2 - dr;
+            r2 = b2;
+        }
+
+        return [r1, r2];
+    }
+
     // plotDrag: move the plot in response to a drag
     function plotDrag(dx, dy) {
         function dragAxList(axList, pix) {
+            var avgdpix = 0;
             for(var i = 0; i < axList.length; i++) {
                 var axi = axList[i];
                 if(!axi.fixedrange) {
-                    axi.range = [axi._r[0] - pix / axi._m, axi._r[1] - pix / axi._m];
+                    if(axi.boundsmode === 'auto' && !axi.bounds) {
+                        axi.bounds = computeAxisBounds(axi);
+                    }
+
+                    axi.range = clampRangeToBounds(
+                        [axi._r[0] - pix / axi._m, axi._r[1] - pix / axi._m],
+                        axi.bounds
+                    );
+
+                    avgdpix += (axi._r[0] - axi.range[0] + axi._r[1] - axi.range[1]) * axi._m / 2;
                 }
             }
+            return avgdpix / (axList.length || 1);
         }
 
         if(xActive === 'ew' || yActive === 'ns') {
-            if(xActive) dragAxList(xa, dx);
-            if(yActive) dragAxList(ya, dy);
+            if(xActive) dx = dragAxList(xa, dx);
+            if(yActive) dy = dragAxList(ya, dy);
             updateSubplots([xActive ? -dx : 0, yActive ? -dy : 0, pw, ph]);
             ticksAndAnnotations(yActive, xActive);
             return;
