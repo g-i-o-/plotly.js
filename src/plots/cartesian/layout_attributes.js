@@ -107,7 +107,7 @@ module.exports = {
             'If set, the plot cannot show anything outside this region.'
         ].join(' ')
     },
-    
+
     boundsmode: {
         valType: 'enumerated',
         values: ['normal', 'auto'],
