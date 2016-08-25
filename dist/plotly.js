@@ -41887,7 +41887,7 @@ var ndarray   = require('ndarray')
 
 var nextPow2  = require('bit-twiddle').nextPow2
 
-var selectRange = require('cwise/lib/wrapper')({"args":["array",{"offset":[0,0,1],"array":0},{"offset":[0,0,2],"array":0},{"offset":[0,0,3],"array":0},"scalar","scalar","index"],"pre":{"body":"{this_closestD2=1e8,this_closestX=-1,this_closestY=-1}","args":[],"thisVars":["this_closestD2","this_closestX","this_closestY"],"localVars":[]},"body":{"body":"{if(_inline_46_arg0_<255||_inline_46_arg1_<255||_inline_46_arg2_<255||_inline_46_arg3_<255){var _inline_46_l=_inline_46_arg4_-_inline_46_arg6_[0],_inline_46_a=_inline_46_arg5_-_inline_46_arg6_[1],_inline_46_f=_inline_46_l*_inline_46_l+_inline_46_a*_inline_46_a;_inline_46_f<this_closestD2&&(this_closestD2=_inline_46_f,this_closestX=_inline_46_arg6_[0],this_closestY=_inline_46_arg6_[1])}}","args":[{"name":"_inline_46_arg0_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_46_arg1_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_46_arg2_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_46_arg3_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_46_arg4_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_46_arg5_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_46_arg6_","lvalue":false,"rvalue":true,"count":4}],"thisVars":["this_closestD2","this_closestX","this_closestY"],"localVars":["_inline_46_a","_inline_46_f","_inline_46_l"]},"post":{"body":"{return[this_closestX,this_closestY,this_closestD2]}","args":[],"thisVars":["this_closestD2","this_closestX","this_closestY"],"localVars":[]},"debug":false,"funcName":"cwise","blockSize":64})
+var selectRange = require('cwise/lib/wrapper')({"args":["array",{"offset":[0,0,1],"array":0},{"offset":[0,0,2],"array":0},{"offset":[0,0,3],"array":0},"scalar","scalar","index"],"pre":{"body":"{this_closestD2=1e8,this_closestX=-1,this_closestY=-1}","args":[],"thisVars":["this_closestD2","this_closestX","this_closestY"],"localVars":[]},"body":{"body":"{if(_inline_49_arg0_<255||_inline_49_arg1_<255||_inline_49_arg2_<255||_inline_49_arg3_<255){var _inline_49_l=_inline_49_arg4_-_inline_49_arg6_[0],_inline_49_a=_inline_49_arg5_-_inline_49_arg6_[1],_inline_49_f=_inline_49_l*_inline_49_l+_inline_49_a*_inline_49_a;_inline_49_f<this_closestD2&&(this_closestD2=_inline_49_f,this_closestX=_inline_49_arg6_[0],this_closestY=_inline_49_arg6_[1])}}","args":[{"name":"_inline_49_arg0_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_49_arg1_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_49_arg2_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_49_arg3_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_49_arg4_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_49_arg5_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_49_arg6_","lvalue":false,"rvalue":true,"count":4}],"thisVars":["this_closestD2","this_closestX","this_closestY"],"localVars":["_inline_49_a","_inline_49_f","_inline_49_l"]},"post":{"body":"{return[this_closestX,this_closestY,this_closestD2]}","args":[],"thisVars":["this_closestD2","this_closestX","this_closestY"],"localVars":[]},"debug":false,"funcName":"cwise","blockSize":64})
 
 function SelectResult(x, y, id, value, distance) {
   this.coord = [x, y]
@@ -69164,7 +69164,7 @@ function createSurfaceExtractor(args) {
 
 
 
-var fill = require('cwise/lib/wrapper')({"args":["index","array","scalar"],"pre":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"body":{"body":"{_inline_7_arg1_=_inline_7_arg2_.apply(void 0,_inline_7_arg0_)}","args":[{"name":"_inline_7_arg0_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_7_arg1_","lvalue":true,"rvalue":false,"count":1},{"name":"_inline_7_arg2_","lvalue":false,"rvalue":true,"count":1}],"thisVars":[],"localVars":[]},"post":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"debug":false,"funcName":"cwise","blockSize":64})
+var fill = require('cwise/lib/wrapper')({"args":["index","array","scalar"],"pre":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"body":{"body":"{_inline_1_arg1_=_inline_1_arg2_.apply(void 0,_inline_1_arg0_)}","args":[{"name":"_inline_1_arg0_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_1_arg1_","lvalue":true,"rvalue":false,"count":1},{"name":"_inline_1_arg2_","lvalue":false,"rvalue":true,"count":1}],"thisVars":[],"localVars":[]},"post":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"debug":false,"funcName":"cwise","blockSize":64})
 
 module.exports = function(array, f) {
   fill(array, f)
@@ -105769,6 +105769,8 @@ module.exports = function handleAxisDefaults(containerIn, containerOut, coerce, 
     Lib.noneOrAll(containerIn.range, containerOut.range, [0, 1]);
 
     coerce('fixedrange');
+    coerce('bounds');
+    coerce('boundsmode');
 
     handleTickValueDefaults(containerIn, containerOut, coerce, axType);
     handleTickLabelDefaults(containerIn, containerOut, coerce, axType, options);
@@ -106652,20 +106654,61 @@ module.exports = function dragBox(gd, plotinfo, x, y, w, h, ns, ew) {
         else if(dragger.onmousewheel !== undefined) dragger.onmousewheel = zoomWheel;
     }
 
+    function computeAxisBounds(axi) {
+        var plotAxis = dragOptions.plotinfo[axi._name];
+        return Axes.getAutoRange(plotAxis);
+    }
+
+    function clampRangeToBounds(range, bounds) {
+        if(!bounds) {
+            return range;
+        }
+
+        var r1 = range[0], r2 = range[1];
+        var dr = r2 - r1;
+
+        var b1 = bounds[0];
+        var b2 = bounds[1];
+        var db = b2 - b1;
+        if(dr > db) {
+            dr = db;
+        }
+        if(r1 < b1) {
+            r2 = b1 + dr;
+            r1 = b1;
+        } else if(r2 > b2) {
+            r1 = b2 - dr;
+            r2 = b2;
+        }
+
+        return [r1, r2];
+    }
+
     // plotDrag: move the plot in response to a drag
     function plotDrag(dx, dy) {
         function dragAxList(axList, pix) {
+            var avgdpix = 0;
             for(var i = 0; i < axList.length; i++) {
                 var axi = axList[i];
                 if(!axi.fixedrange) {
-                    axi.range = [axi._r[0] - pix / axi._m, axi._r[1] - pix / axi._m];
+                    if(axi.boundsmode === 'auto' && !axi.bounds) {
+                        axi.bounds = computeAxisBounds(axi);
+                    }
+
+                    axi.range = clampRangeToBounds(
+                        [axi._r[0] - pix / axi._m, axi._r[1] - pix / axi._m],
+                        axi.bounds
+                    );
+
+                    avgdpix += (axi._r[0] - axi.range[0] + axi._r[1] - axi.range[1]) * axi._m / 2;
                 }
             }
+            return avgdpix / (axList.length || 1);
         }
 
         if(xActive === 'ew' || yActive === 'ns') {
-            if(xActive) dragAxList(xa, dx);
-            if(yActive) dragAxList(ya, dy);
+            if(xActive) dx = dragAxList(xa, dx);
+            if(yActive) dy = dragAxList(ya, dy);
             updateSubplots([xActive ? -dx : 0, yActive ? -dy : 0, pw, ph]);
             ticksAndAnnotations(yActive, xActive);
             return;
@@ -108403,6 +108446,24 @@ module.exports = {
             {valType: 'number'},
             {valType: 'number'}
         ],
+        
+    },
+
+    bounds: {
+        valType: 'info_array',
+        
+        items: [
+            {valType: 'number'},
+            {valType: 'number'}
+        ],
+        
+    },
+
+    boundsmode: {
+        valType: 'enumerated',
+        values: ['normal', 'auto'],
+        dflt: 'normal',
+        
         
     },
 
@@ -113505,6 +113566,8 @@ module.exports = {
     rangemode: axesAttrs.rangemode,
     range: axesAttrs.range,
     fixedrange: axesAttrs.fixedrange,
+    bounds: axesAttrs.bounds,
+    boundsmode: axesAttrs.boundsmode,
     // ticks
     tickmode: axesAttrs.tickmode,
     nticks: axesAttrs.nticks,
